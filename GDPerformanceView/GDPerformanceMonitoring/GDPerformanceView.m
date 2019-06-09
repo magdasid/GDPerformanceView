@@ -189,12 +189,12 @@
     if (self.screenUpdatesBeginTime == 0.0f) {
         self.screenUpdatesBeginTime = displayLink.timestamp;
     } else {
-        self.screenUpdatesCount += 0.2;
+        self.screenUpdatesCount += 0.1;
         
         CFTimeInterval screenUpdatesTime = self.displayLink.timestamp - self.screenUpdatesBeginTime;
         
-        if (screenUpdatesTime >= 0.2) {
-            CFTimeInterval updatesOverSecond = screenUpdatesTime - 0.2f;
+        if (screenUpdatesTime >= 0.1) {
+            CFTimeInterval updatesOverSecond = screenUpdatesTime - 0.1f;
             int framesOverSecond = updatesOverSecond / self.averageScreenUpdatesTime;
             
             self.screenUpdatesCount -= framesOverSecond;
