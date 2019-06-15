@@ -209,7 +209,8 @@
 }
 
 - (void)takeReadings {
-    int fps = self.screenUpdatesCount / (self.displayLink.timestamp - self.screenUpdatesBeginTime);
+    //int fps = self.screenUpdatesCount / (self.displayLink.timestamp - self.screenUpdatesBeginTime);
+    int fps = 1 / (self.displayLink.targetTimestamp - self.displayLink.timestamp);
     float cpu = [self cpuUsage];
     int64_t memory = [self memoryUsage];
     
