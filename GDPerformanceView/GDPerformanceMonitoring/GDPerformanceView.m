@@ -189,18 +189,19 @@
     if (self.screenUpdatesBeginTime == 0.0f) {
         self.screenUpdatesBeginTime = displayLink.timestamp;
     } else {
-        self.screenUpdatesCount += 0.1;
+        self.screenUpdatesCount += 1;
         
         CFTimeInterval screenUpdatesTime = self.displayLink.timestamp - self.screenUpdatesBeginTime;
         
         if (screenUpdatesTime >= 0.1) {
-            CFTimeInterval updatesOverSecond = screenUpdatesTime - 0.1f;
+            
+            /*CFTimeInterval updatesOverSecond = screenUpdatesTime - 0.1f;
             int framesOverSecond = updatesOverSecond / self.averageScreenUpdatesTime;
             
             self.screenUpdatesCount -= framesOverSecond;
             if (self.screenUpdatesCount < 0) {
                 self.screenUpdatesCount = 0;
-            }
+            }*/
             
             [self takeReadings];
         }
@@ -208,7 +209,7 @@
 }
 
 - (void)takeReadings {
-    int fps = self.screenUpdatesCount;
+    int fps = self.screenUpdatesCount / (self.displayLink.timestamp - self.screenUpdatesBeginTime);
     float cpu = [self cpuUsage];
     int64_t memory = [self memoryUsage];
     
