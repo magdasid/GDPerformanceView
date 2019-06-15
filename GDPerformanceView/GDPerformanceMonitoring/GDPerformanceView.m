@@ -193,8 +193,7 @@
         
         CFTimeInterval screenUpdatesTime = self.displayLink.timestamp - self.screenUpdatesBeginTime;
         
-        if (screenUpdatesTime >= 1.0) {
-            
+        if (screenUpdatesTime >= 0.1) {
             /*CFTimeInterval updatesOverSecond = screenUpdatesTime - 0.1f;
             int framesOverSecond = updatesOverSecond / self.averageScreenUpdatesTime;
             
@@ -209,8 +208,8 @@
 }
 
 - (void)takeReadings {
-    //int fps = self.screenUpdatesCount / (self.displayLink.timestamp - self.screenUpdatesBeginTime);
-    int fps = 1 / (self.displayLink.targetTimestamp - self.displayLink.timestamp);
+    int fps = roundf(self.screenUpdatesCount / (self.displayLink.timestamp - self.screenUpdatesBeginTime));
+    //int fps = 1 / (self.displayLink.targetTimestamp - self.displayLink.timestamp);
     float cpu = [self cpuUsage];
     int64_t memory = [self memoryUsage];
     
